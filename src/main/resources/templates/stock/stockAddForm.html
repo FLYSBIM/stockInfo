@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>새 주식 추가</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #555;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-sizing: border-box; /* padding이 너비에 포함되도록 설정 */
+    }
+    .button-container {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px; /* 버튼 사이 간격 */
+      margin-top: 30px;
+    }
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      color: white;
+    }
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>📝 새 주식 추가</h1>
+  <form th:action="@{/stock/add}" method="post">
+    <div class="form-group">
+      <label for="ticker">티커 (Ticker)</label>
+      <input type="text" id="ticker" name="ticker" placeholder="예: AAPL" required>
+    </div>
+    <div class="form-group">
+      <label for="stockName">종목명 (Stock Name)</label>
+      <input type="text" id="stockName" name="stockName" placeholder="예: Apple Inc." required>
+    </div>
+    <div class="form-group">
+      <label for="price">현재가 (Price)</label>
+      <input type="number" id="price" name="price" placeholder="예: 172.25" step="0.01" required>
+    </div>
+    <div class="button-container">
+      <a th:href="@{/stock}" class="btn btn-secondary">목록으로</a>
+      <button type="submit" class="btn btn-primary">저장하기</button>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

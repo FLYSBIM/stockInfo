@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>주식 상세 정보</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; }
+        .detail-grid { display: grid; grid-template-columns: 150px 1fr; gap: 15px; margin-top: 30px; }
+        .detail-grid strong { font-weight: bold; color: #555; text-align: right; }
+        .detail-grid span { color: #333; }
+        .button-group { margin-top: 40px; text-align: center; display: flex; justify-content: center; gap: 15px; }
+        .action-button {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .list-button { background-color: #6c757d; } /* 회색 계열 */
+        .list-button:hover { background-color: #5a6268; }
+        .edit-button { background-color: #007bff; } /* 파란색 계열 */
+        .edit-button:hover { background-color: #0056b3; }
+        .delete-button { background-color: #dc3545; } /* 빨간색 계열 */
+        .delete-button:hover { background-color: #c82333; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📈 주식 상세 정보</h1>
+
+    <div th:if="${stock != null}" class="detail-container">
+        <div class="detail-grid">
+            <strong>티커:</strong>
+            <span th:text="${stock.ticker}">AAPL</span>
+
+            <strong>종목명:</strong>
+            <span th:text="${stock.stockName}">Apple Inc.</span>
+
+            <strong>현재가:</strong>
+            <span th:text="'$' + ${#numbers.formatDecimal(stock.price, 0, 'COMMA', 2, 'POINT')}">$150.00</span>
+
+            <strong>PER(2025.06):</strong>
+            <span th:text="${stock.priceEarningRatio}"></span>
+
+            <th:block th:if="${highPER}">
+                <strong>PER이 높은 주식: </strong>
+                <span th:text="|이 회사를 인수한다면 현재(2025.06) 벌어들이는 수익 기준으로 투자금 회수에 ${stock.priceEarningRatio}년이 걸려요|"></span>
+            </th:block>
+
+
+        </div>
+
+        <div class="button-group">
+            <a href="/stock" class="action-button list-button">목록으로</a>
+            <a th:href="@{/stock/{stockTicker}/edit(stockTicker=${stock.ticker})}" class="action-button edit-button">수정하기</a>
+            <form th:action="@{/stock/{stockTicker}/delete(stockTicker=${stock.ticker})}" method="post" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
+                <button type="submit" class="action-button delete-button">삭제하기</button>
+            </form>
+        </div>
+    </div>
+
+    <div th:if="${stock == null}" class="empty-message">
+        <p>조회된 주식 정보가 없습니다.</p>
+        <div class="button-group">
+            <a href="/stock" class="action-button list-button">목록으로</a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

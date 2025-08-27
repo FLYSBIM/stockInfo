@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>주식 정보 수정</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; background-color: #f8f9fa; }
+        .container { max-width: 600px; margin: 40px auto; padding: 30px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: #fff; }
+        h1 { text-align: center; color: #333; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #555; }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
+        }
+        .form-control[readonly] { background-color: #e9ecef; cursor: not-allowed; }
+        .button-group { margin-top: 30px; text-align: right; display: flex; justify-content: flex-end; gap: 10px; }
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary { background-color: #007bff; } /* 파란색 계열 */
+        .btn-primary:hover { background-color: #0056b3; }
+        .btn-secondary { background-color: #6c757d; } /* 회색 계열 */
+        .btn-secondary:hover { background-color: #5a6268; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📝 주식 정보 수정</h1>
+    <form th:action="@{/stock/{stockTicker}/edit(stockTicker=${stock.ticker})}" method="post">
+        <div class="form-group">
+            <label for="ticker">티커</label>
+            <input type="text" id="ticker" name="ticker" th:value="${stock.ticker}" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="stockName">종목명</label>
+            <input type="text" id="stockName" name="stockName" th:value="${stock.stockName}" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="price">현재가</label>
+            <input type="number" id="price" name="price" th:value="${stock.price}" class="form-control" step="0.01" required>
+        </div>
+
+        <div class="button-group">
+            <a th:href="@{/stock/{ticker}(ticker=${stock.ticker})}" class="btn btn-secondary">취소</a>
+            <button type="submit" class="btn btn-primary">수정 완료</button>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>

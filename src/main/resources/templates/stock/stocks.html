@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>주식 목록</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .empty-message { text-align: center; color: #888; padding: 20px; }
+
+        /* --- 추가된 버튼 스타일 --- */
+        .add-button {
+            position: fixed; /* 화면에 위치 고정 */
+            bottom: 40px;
+            right: 40px;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none; /* 링크 밑줄 제거 */
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* 그림자 효과 */
+            transition: background-color 0.3s ease;
+        }
+
+        .add-button:hover {
+            background-color: #0056b3; /* 마우스 올렸을 때 색상 변경 */
+        }
+        /* ----------------------- */
+    </style>
+</head>
+<body>
+
+<h1>📈 주식 현재가</h1>
+
+<div th:if="${!#lists.isEmpty(stocks)}">
+    <table>
+        <thead>
+        <tr>
+            <th>티커</th>
+            <th>종목명</th>
+            <th>현재가</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stock : ${stocks}">
+            <td><a th:href="@{/stock/{stockTicker}(stockTicker=${stock.ticker})}" th:text="${stock.ticker}">AAPL</a></td>
+            <td th:text="${stock.stockName}">Apple Inc.</td>
+            <td th:text="'$' + ${#numbers.formatDecimal(stock.price, 0, 'COMMA', 2, 'POINT')}">
+                $150.00
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:if="${#lists.isEmpty(stocks)}" class="empty-message">
+    <p>표시할 주식 정보가 없습니다.</p>
+</div>
+
+<a href="/stock/add" class="add-button">추가하기</a>
+
+</body>
+</html>
