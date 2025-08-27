@@ -29,7 +29,7 @@ public class StockController {
 
     @GetMapping("/add")
     public String addStockForm(Model model) {
-        model.addAttribute(new Stock(null,null,null,null));
+        model.addAttribute(new Stock(null,null,null,null,null));
         return "stock/stockAddForm";
     }
 
@@ -70,7 +70,7 @@ public class StockController {
 
     @PostConstruct
     public void init() {
-        stockCRUDService.addStock(new Stock("AAPL","Apple Inc.",214.78,30.25));
-        stockCRUDService.addStock(new Stock("PLTR","Panlantir Technologies",157.17,400.25));
+        stockCRUDService.addStock(new Stock("AAPL","Apple Inc.",229.93,30.25,14000000000L));
+        stockCRUDService.addStock(new Stock("PLTR","Panlantir Technologies",157.23,400.25,2000000000L));
     }
 }

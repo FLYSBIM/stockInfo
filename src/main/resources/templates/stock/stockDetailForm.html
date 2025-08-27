@@ -46,6 +46,9 @@
             <strong>현재가:</strong>
             <span th:text="'$' + ${#numbers.formatDecimal(stock.price, 0, 'COMMA', 2, 'POINT')}">$150.00</span>
 
+            <strong>시가총액:</strong>
+            <span th:text="'$' + ${stock.marketCapString}">100000</span>
+
             <strong>PER(2025.06):</strong>
             <span th:text="${stock.priceEarningRatio}"></span>
 
