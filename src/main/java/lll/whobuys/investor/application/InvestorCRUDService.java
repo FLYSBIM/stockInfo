@@ -33,7 +33,7 @@ public class InvestorCRUDService {
     }
 
     public ResponseDto createInvestor(InvestorRequestDto requestDto) {
-        Investor savedInvestor = investorService.createInvestor(requestDto.getName(),requestDto.getInvestorType());
+        Investor savedInvestor = investorService.createInvestor(requestDto.getInvestorName(),requestDto.getInvestorType());
         return ResponseDto.builder()
                 .path(INVESTORS_SERVLET_PATH)
                 .method(ResponseDtoMethod.POST)

@@ -33,7 +33,7 @@ public class InvestorCRUDController {
         return ResponseEntity.ok(investorCRUDService.updateInvestor(requestDto));
     }
 
-    @DeleteMapping("investors")
+    @DeleteMapping("/investors")
     public ResponseEntity deleteInvestor(@RequestParam final Long investorId) {
         return ResponseEntity.ok(investorCRUDService.deleteInvestor(investorId));
     }

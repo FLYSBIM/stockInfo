@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class InvestorStrategy {
 
-    @Column(name="investor_type", nullable=false)
+    @Column(name="investor_type")
     private InvestorType investorType;
 
     public InvestorStrategy(final InvestorType investorType) {

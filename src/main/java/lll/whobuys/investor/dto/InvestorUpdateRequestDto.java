@@ -24,7 +24,7 @@ public class InvestorUpdateRequestDto implements InvestorRequestDto{
     }
 
     @Override
-    public String getName() {
+    public String getInvestorName() {
         return investorUpdateData.getUpdateName();
     }
 

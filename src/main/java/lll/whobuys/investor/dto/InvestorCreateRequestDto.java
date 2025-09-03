@@ -8,11 +8,12 @@ import lombok.NoArgsConstructor;
 @Getter
 public class InvestorCreateRequestDto implements InvestorRequestDto {
 
-    private String name;
+    private String investorName;
     private InvestorType investorType;
 
     public InvestorCreateRequestDto(final String name, final InvestorType type) {
-        this.name = name;
+        this.investorName = name;
         this.investorType = type;
     }
+
 }
