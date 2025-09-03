@@ -1,7 +1,7 @@
 package lll.whobuys.investor.domain;
 
 import jakarta.persistence.*;
-import lll.whobuys.common.ModifiableEntity;
+import lll.whobuys.common.domain.ModifiableEntity;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,8 +25,24 @@ public class Investor extends ModifiableEntity {
     @Embedded
     private InvestorStrategy investorStrategy;
 
-    public Investor(final InvestorName investorName, final InvestorStrategy investorStrategy) {
-        this.investorName = investorName;
-        this.investorStrategy = investorStrategy;
+    public String getName(){
+        return investorName.getInvestorName();
+    }
+
+    public InvestorType getInvestorType(){
+        return investorStrategy.getInvestorType();
+    }
+
+    public Investor(final String investorName, final InvestorType investorStrategy) {
+        this.investorName = new InvestorName(investorName);
+        this.investorStrategy = new InvestorStrategy(investorStrategy);
+    }
+
+    public void updateName(final String updateName) {
+        this.investorName = new InvestorName(updateName);
+    }
+
+    public void updateStrategy(final InvestorType updateType) {
+        this.investorStrategy = new InvestorStrategy(updateType);
     }
 }
